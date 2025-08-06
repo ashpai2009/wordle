@@ -25,10 +25,16 @@ class Wordle:
         Args:
             words_path: Path to the file containing the words.
         """
+
+
+
+
         with open(words_path, "r") as file:
             self.words: List[str] = [line.strip() for line in file.readlines()]
         self.reset()
-    
+
+
+
     def guess(self, word: str) -> List[int]:
         """
         Process a guess, and return the feedback.
@@ -67,6 +73,12 @@ class Wordle:
         This mimics NYT Wordle's behavior of not overcounting duplicate letters in a guess.
         """
         # TODO: Part 1.III.A
+        
+        
+
+
+
+
         pass # Remove this line when you have implemented the method.   
     
     def reset(self) -> str:
@@ -76,8 +88,26 @@ class Wordle:
         Returns:
             The target word.
         """
-        # TODO: Part 1.I.B
-        pass # Remove this line when you have implemented the method.
+        self.target_word = random.choice(self.words)
+
+        self.guesses = []
+        self.num_guesses = 0
+        self.won = False
+
+
+        self.target_word_freqs = {}
+
+        for current in self.target_word:
+            if current in self.target_word_freqs:
+                self.target_word_freqs[current] += 1
+            else:
+                self.target_word_freqs[current] = 1
+        
+
+        return self.target_word
+        
+        
+    
     
     def reset_with_target_word(self, word: str) -> None:
         """
@@ -86,8 +116,23 @@ class Wordle:
         Args:
             word (str): The target word.
         """
-        # TODO: Part 1.I.A
-        pass # Remove this line when you have implemented the method.
+        
+        self.target_word = word
+        self.guesses = []
+        self.num_guesses = 0
+        self.won = False
+
+
+        self.target_word_freqs = {}
+
+        for current in self.target_word:
+            if current in self.target_word_freqs:
+                self.target_word_freqs[current] += 1
+            else:
+                self.target_word_freqs[current] = 1
+        
+
+
     
     def game_over(self) -> bool:
         """
@@ -96,5 +141,11 @@ class Wordle:
         Returns:
             True if the game has ended, False otherwise.
         """
-        # TODO: Part 1.II
-        pass # Remove this line when you have implemented the method.
+
+        if self.guess_word == self.target_word:
+            return True
+        else:
+            return False
+
+        
+        
