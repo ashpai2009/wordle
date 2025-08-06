@@ -74,7 +74,18 @@ class Wordle:
         """
         # TODO: Part 1.III.A
         
+        letter_num = 0
+        feedback = []
+        for letter in guess_word:
+            if letter == candidate_word[letter_num]:
+                feedback.append(2)
+            elif letter in candidate_word:
+                feedback.append(1)
+            else:
+                feedback.append(0)
+            letter_num += 1
         
+        return feedback
 
 
 
