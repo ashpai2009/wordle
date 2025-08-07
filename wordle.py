@@ -69,7 +69,7 @@ class Wordle:
                 0: The letter is not in the word.
                 1: The letter is in the word, but in the wrong position.
                 2: The letter is in the word, and in the correct position.
-            
+
         Note: If two letters in the guessed word are the same, and the target word contains
         only one occurrence of that letter, then only one of those letters will be marked
         as a match — either green (2) if it is in the correct position, or yellow (1) if 
@@ -77,30 +77,28 @@ class Wordle:
         This mimics NYT Wordle's behavior of not overcounting duplicate letters in a guess.
         """
 
+
         target_word_freq = {}
         for letter in candidate_word:
-            target_word_freq[letter] += 1
+            target_word_freq[letter] = target_word_freq.get(letter, 0) + 1
 
-        letter_num = 0
-        
-        feedback = []
-        for letter in guess_word:  
-            if letter == candidate_word[letter_num]:
+
+        feedback = []  
+        for i in range(0, 5):
+            if guess_word[i] == candidate_word[i]:
                 feedback.append(2)
+                target_word_freq[guess_word[i]] -= 1 
             else:
                 feedback.append(0)
-            letter_num += 1
 
-
+    
         for i in range(0, 5):
-            if feedback[i] == 0:
-                if target_word_freq.get[guess_word[i]] > 0:
-                    feedback[i] = 1
-                    target_word_freq[guess_word[i]] = target_word_freq[guess_word[i]] - 1
+            if feedback[i] == 0:  
+                if target_word_freq.get(guess_word[i], 0) > 0:
+                    feedback[i] = 1  
+                    target_word_freq[guess_word[i]] -= 1 
 
         return feedback
-        
-
 
 
 
