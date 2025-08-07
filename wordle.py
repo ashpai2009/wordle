@@ -51,8 +51,12 @@ class Wordle:
         # TODO: Part 1.III.B
         pass # Remove this line when you have implemented the method.
 
+    
+        
+
+
     @staticmethod
-    def get_feedback(guess_word: str, candidate_word: str) -> str:
+    def get_feedback(guess_word: str, candidate_word: str) -> List[int]:
         """
         Get the feedback for a guess.
 
@@ -72,25 +76,34 @@ class Wordle:
         it is in the wrong position. The other occurrences will be marked as 0 (not in the word).
         This mimics NYT Wordle's behavior of not overcounting duplicate letters in a guess.
         """
-        # TODO: Part 1.III.A
-        
+
+        target_word_freq = {}
+        for letter in candidate_word:
+            target_word_freq[letter] += 1
+
         letter_num = 0
+        
         feedback = []
-        for letter in guess_word:
+        for letter in guess_word:  
             if letter == candidate_word[letter_num]:
                 feedback.append(2)
-            elif letter in candidate_word:
-                feedback.append(1)
             else:
                 feedback.append(0)
             letter_num += 1
-        
+
+
+        for i in range(0, 5):
+            if feedback[i] == 0:
+                if target_word_freq.get[guess_word[i]] > 0:
+                    feedback[i] = 1
+                    target_word_freq[guess_word[i]] = target_word_freq[guess_word[i]] - 1
+
         return feedback
+        
 
 
 
 
-        pass # Remove this line when you have implemented the method.   
     
     def reset(self) -> str:
         """
