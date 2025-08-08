@@ -35,25 +35,6 @@ class Wordle:
 
 
 
-    def guess(self, word: str) -> List[int]:
-        """
-        Process a guess, and return the feedback.
-
-        Args:
-            word (str): The guessed word. Must be a valid word in the word list.
-
-        Returns:
-            A list of integers, where each integer represents the feedback of the guess.
-                0: The letter is not in the word.
-                1: The letter is in the word, but in the wrong position.
-                2: The letter is in the word, and in the correct position.
-        """
-        # TODO: Part 1.III.B
-        pass # Remove this line when you have implemented the method.
-
-    
-        
-
 
     @staticmethod
     def get_feedback(guess_word: str, candidate_word: str) -> List[int]:
@@ -99,6 +80,59 @@ class Wordle:
                     target_word_freq[guess_word[i]] -= 1 
 
         return feedback
+
+
+
+
+    
+    
+    
+    
+    
+    
+    def guess(self, word: str) -> List[int]:
+        """
+        Process a guess, and return the feedback.
+
+        Args:
+            word (str): The guessed word. Must be a valid word in the word list.
+
+        Returns:
+            A list of integers, where each integer represents the feedback of the guess.
+                0: The letter is not in the word.
+                1: The letter is in the word, but in the wrong position.
+                2: The letter is in the word, and in the correct position.
+        """
+        
+
+        
+            
+        self.guesses.append(word)
+        self.num_guesses += 1
+        
+        feedback = Wordle.get_feedback(word, self.target_word)
+
+        game_over = self.game_over()
+        if game_over == True:
+            self.won = True
+        else:
+            self.won = False
+        
+        return feedback
+    
+    
+        
+
+
+        
+
+        # TODO: Part 1.III.B
+            
+
+    
+        
+
+
 
 
 
@@ -164,7 +198,7 @@ class Wordle:
             True if the game has ended, False otherwise.
         """
 
-        if self.guess_word == self.target_word:
+        if self.guesses[-1] == self.target_word:
             return True
         else:
             return False
