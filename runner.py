@@ -19,18 +19,25 @@ class Runner:
         """
         Runs through a Wordle game using the solver of choice.
         """
-
+        self.wordle.reset()
+        self.solver.reset()
         while not self.wordle.game_over():
+            
 
             guess = self.solver.guess()
 
             feedback = self.wordle.guess(guess)
 
-            print(f"Ur guess is {guess} and ur feedback is {feedback}")
+            
 
             self.solver.update_knowledge(guess, feedback)
 
             if self.wordle.game_over():
+                print(f"Your final guess is {guess}")
+                print(f"The target word was {self.wordle.target_word}")
+
+
+
                 break
 
         
