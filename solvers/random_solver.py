@@ -9,5 +9,10 @@ class RandomSolver(BaseSolver):
         Returns:
             The word to guess.
         """
-        # TODO: Part 2.III
-        pass # Remove this line when you have implemented the method.
+
+        guess = random.choice(self.valid_words).lower().strip()
+        
+        self.guesses.append(guess)
+
+        return guess
+
